@@ -58,3 +58,13 @@ function cancelBubble(e){
     e.cancelBubble = true;
   }
 }
+
+// 阻止默認事件兼容性
+function preventDefaultEvent(){
+  var e = e || window.event;
+  if(e.preventDefault){
+    e.preventDefault();
+  }else{
+    e.returnValue = false;
+  }
+}
