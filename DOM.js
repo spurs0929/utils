@@ -131,3 +131,18 @@ function getStyles(el, prop){
     return el.styleCurrent;
   }
 }
+
+// 監測html文檔大小
+function getScrollSize(){
+  if(document.body.scrollWidth){
+    return {
+      width: document.body.scrollWidth,
+      height: document.body.scrollHeight
+    }
+  }else{
+    return {
+      width: document.documentElement.scrollWidth,
+      heigh: document.documentElement.scrollHeight
+    }
+  }
+}
