@@ -31,3 +31,20 @@ function getScrollOffset(){
     }
   }
 }
+// 查看具有父級定位元素到可視窗口的距離 
+function getElemDocPosition(el){
+  var parent = el.offsetParent,
+      offsetLeft = el.offsetLeft,
+      offsetTop = el.offsetTop;
+   
+  while(parent){
+    offsetLeft += parent.offsetLeft;
+    offsetTop += parent.offsetTop;
+    parent = parent.offsetParent;
+  }    
+
+  return {
+    left: offsetLeft,
+    top: offsetTop
+  }
+}
