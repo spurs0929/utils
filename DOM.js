@@ -146,3 +146,26 @@ function getScrollSize(){
     }
   }
 }
+
+/**
+ * 尋找元素父節點的方法
+ * @param node 元素節點
+ * @param n n層父節點
+ */
+function elemParent(node, n){
+  // 取得 n 的類型
+  var type = typeof(n);
+
+  if(type === 'undefined'){
+    return node.parentNode;
+  }else if(n < 0 || type !== 'number'){
+    return undefined;
+  }
+
+  while(n){
+    node = node.parentNode;
+    n--;
+  }
+
+  return node;
+} 
