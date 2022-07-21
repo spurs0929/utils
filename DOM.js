@@ -81,3 +81,16 @@ function addEvent(el, type, fn){
     el['on' + type] = fn;
   }
 }
+
+// 取消註冊事件 / 移除事件處理函數兼容
+function removeEvent(el, type, fn){
+  if(el.addEventListener){
+    el.removeEventListener(type, fn, false);
+  }else if(el.attachEvent){
+    el.detachEvent('on' + type, function(){
+      fn.call(el);
+    });
+  }else{
+    el['on' + type] = null;
+  }
+}
