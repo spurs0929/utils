@@ -48,3 +48,13 @@ function getElemDocPosition(el){
     top: offsetTop
   }
 }
+
+// 取消冒泡事件並兼容IE
+function cancelBubble(e){
+  var e = e || window.event;
+  if(e.stopPropagation){
+    e.stopPropagation();
+  }else{
+    e.cancelBubble = true;
+  }
+}
