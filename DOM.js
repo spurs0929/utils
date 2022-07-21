@@ -116,3 +116,18 @@ function getViewportSize(){
     }
   }
 }
+
+// 查看元素属性(寬高)兼容IE9及IE8
+function getStyles(el, prop){
+  if(window.getComputedStyle){
+    if(prop){
+      return window.getComputedStyle(el, null)[prop];
+    }
+    return window.getComputedStyle(el, null); 
+  }else{
+    if(prop){
+      return el.styleCurrent.prop;
+    }
+    return el.styleCurrent;
+  }
+}
