@@ -17,6 +17,7 @@ function elemChildren(node){
   return temp;
 }
 
+// 查看滾動條距離
 function getScrollOffset(){
   if(window.pageXOffset){
     return {
