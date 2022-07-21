@@ -94,3 +94,25 @@ function removeEvent(el, type, fn){
     el['on' + type] = null;
   }
 }
+
+// 瀏覽器可視區域的尺寸(窗口的寬高)怪異模式和標準模式並兼容IE9及IE8
+function getViewportSize(){
+  if(window.innerWidth){ // 正常
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight
+    }
+  }else{
+    if(document.compatMode === 'BackCompat'){ //怪異模式
+      return {
+        width: document.body.clientWidth, 
+        height: document.body.clientHeight
+      }
+    }else{
+      return {
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight
+      }
+    }
+  }
+}
