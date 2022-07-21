@@ -35,3 +35,42 @@ function deepClone(origin, target){
 
   return tar;
 }
+
+// 深拷貝ES6
+function deepClone1(origin, hashMap = new WeakMap()){
+  
+  // 剔除undefined, null, 非object類型
+  if(origin == undefined || typeof origin !== 'object'){
+    return origin;
+  }
+
+  // 剔除Date
+  if(origin instanceof Date){
+    return new Date(origin);
+  }
+
+  // 剔除RegExp
+  if(origin instanceof RegExp){
+    return new RegExp(origin);
+  }
+
+  const hashKey = hashMap.get(origin);
+
+  if(hashKey){
+    return hashKey;
+  }
+
+  // 構建與origin相同型別的變數
+  const target = new origin.constructor();
+
+  hashMap.set(origin, target);
+
+  for(let k in origin){
+    // 剔除原型上的屬性
+    if(origin.hasOwnProperty(k)){
+      target[k] = deepClone1(origin[k], hashMap);
+    }
+  }
+
+  return target;
+}
