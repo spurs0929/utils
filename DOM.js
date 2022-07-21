@@ -169,3 +169,16 @@ function elemParent(node, n){
 
   return node;
 } 
+
+// 滑鼠位置座標pageX/Y
+function pagePos(e){
+  var sLeft = getScrollOffset().left,
+      sTop = getScrollOffset().top(),
+      cLeft = document.documentElement.clientLeft || 0,
+      cTop = document.documentElement.clientTop || 0;
+
+  return {
+    X: e.clientX + sLeft - cLeft,
+    Y: e.clientY + sTop - cTop
+  }    
+}
