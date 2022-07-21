@@ -68,3 +68,16 @@ function preventDefaultEvent(){
     e.returnValue = false;
   }
 }
+
+// 註冊/綁定 事件處理函數及兼容版本
+function addEvent(el, type, fn){
+  if(el.addEventListener){
+    el.addEventListener(type, fn. false);
+  }else if(el.attachEvent){
+    el.attachEvent('on' + type, function(){
+      fn.call(el);
+    });
+  }else{
+    el['on' + type] = fn;
+  }
+}
