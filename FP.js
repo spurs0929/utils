@@ -37,3 +37,31 @@ Function.prototype.partial = function(){
     return _self.apply(this, newArgs);
   }    
 }
+
+// 封裝柯理化函數
+function curry(fn, len){
+  // fn參數個數
+  var len = len || fn.length;
+  // 返回函數
+  var func = function(fn){
+    var _args = [].slice.call(arguments, 1);
+ 
+    return function(){
+      var newArgs = _args.concat([].slice.call(arguments));
+      return fn.apply(this, newArgs);
+    }
+  }
+
+  return function(){
+    var argLen = arguments.length;
+    // arguments未傳完
+    if(argLen < len){
+      // 組裝參數
+      var formatedArr = [fn].concat([].slice.call(arguments));
+      // 遞迴柯理化函數
+      return curry(func.apply(this, formatedArr), len - argLen); 
+    }else{
+      return fn.apply(this, arguments);
+    }
+  }
+}
