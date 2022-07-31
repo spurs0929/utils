@@ -182,3 +182,34 @@ function pagePos(e){
     Y: e.clientY + sTop - cTop
   }    
 }
+
+// 封裝getElementsByClassName
+Document.prototype.getElementsByClassName = 
+Element.prototype.getElementsByClassName = 
+document.getElementsByClassName || function(className){
+  var allDoms = this.getElementsByTagName('*'), // 所有標籤
+      allDomsLen = allDoms.length,  // 所有標籤長度
+      allDomsItem, 
+      finalDoms = []; // 結果陣列
+  
+  for(var i = 0; i < allDomsLen; i++){
+    allDomsItem = allDoms[i];
+    
+    var classArr = trimSpace(allDomsItem.className).trim().split(' '), // 所有標籤className
+        classArrLen = classArr.length, // 所有標籤className長度
+        classArrItem;
+
+    for(var j = 0; j < classArrLen; j++){
+      classArrItem = classArr[j];
+      if(classArrItem === className){
+        finalDoms.push(classArrItem);
+      }
+    }    
+  }
+  // 將多個空格變成1個空格
+  function trimSpace(str){
+    return str.replace(/\s+/g, ' ');
+  }
+
+  return finalDoms;
+}
