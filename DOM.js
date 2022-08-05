@@ -213,3 +213,22 @@ document.getElementsByClassName || function(className){
 
   return finalDoms;
 }
+
+/**
+ * 封裝insertAfter方法
+ * @param {插入的節點} target 
+ * @param {目標節點} afterNode 
+ */
+Element.prototype.insertAfter = function(target, afterNode){
+  // 目標節點的後一個節點
+  var nextElement = afterNode.nextElementSibling;
+
+  // nextElement存在
+  if(nextElement){
+    // 插入節點到nextElement前
+    this.insertBefore(target, nextElement)
+  }else{
+    // 插入節點到父節點的最後一項
+    this.appendChild(target);
+  }
+}
