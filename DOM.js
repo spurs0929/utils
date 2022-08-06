@@ -232,3 +232,32 @@ Element.prototype.insertAfter = function(target, afterNode){
     this.appendChild(target);
   }
 }
+
+// 封裝拖曳函數
+function elDrag(el){
+  var x,
+      y;
+
+  addEvent(el, 'mousedown', function(e){
+    var e = e || window.event;
+    x = pagePos(e).X - getStyles(el, 'left');
+    y = pagePos(e).Y - getStyles(el, 'top');
+
+    addEvent(document, 'mousemove', mouseMove);
+    addEvent(document, 'mouseup', mouseUp);
+    cancelBubble(e);
+    preventDefaultEvent(e);
+  });
+
+  function mouseMove(e){
+    var e = e || window.event;
+    el.style.top = pagePos(e).Y - y + 'px';
+    el.style.left = pagePos(e).X - x + 'px';
+  }
+
+  function mouseUp(e){
+    var e = e || window.event;
+    removeEvent(document, 'mousemove', mouseMove);
+    removeEvent(document, 'mouseup', mouseUp);
+  }
+}
