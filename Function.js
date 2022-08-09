@@ -15,3 +15,31 @@ Function.prototype.$bind = finction(context){
 
   return fn;
 }
+
+// 陣列扁平化
+function flatten(arr){
+  var _arr = arr || [],
+      result = [],
+      len = _arr.length,
+      item;
+
+  for(var i = 0; i < len; i++){
+    item = _arr[i];
+
+    if(_isArray(item)){
+      // item為Array
+      result = result.concat(flatten(item));
+    }else{
+      // item不為Array
+      result.push(item);
+    }
+  }    
+
+  return result;
+
+  // 判斷arr是否為元素
+  function _isArray(arr){
+    return {}.toString.call(arr) === '[object Array]';
+  }
+
+}
