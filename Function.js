@@ -1,5 +1,5 @@
 // 重寫Function.prototype.bind()
-Function.prototype.$bind = finction(context){
+Function.prototype.$bind = function(context){
   var _self = this,
       args = [].slice.call(arguments, 1),
       tempFn = function(){};
