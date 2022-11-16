@@ -20,3 +20,24 @@ function myTypeof(val){
     return type;
   }
 }
+
+// 封裝instanceof方法
+function _instanceof(target, type){
+  type = type.prototype;
+  target = target.__proto__;
+
+  while(true){
+    // target === null 代表找到原型鏈的頂
+    if(target === null){
+      return false;
+    }
+
+    // target === type 代表找到
+    if(target === type){
+      return true;
+    }
+
+    // 根據原型鏈往上找
+    target = target.__proto__;
+  }
+}
